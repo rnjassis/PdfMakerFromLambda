@@ -1,0 +1,22 @@
+{
+    "base": "set1",
+    "items": [{
+        "prefix": 2,
+        "suffix": 1,
+        "letter": null
+    },{
+    "prefix": 2,
+    "suffix": 2,
+    "letter": "a"
+    },{
+    "prefix": 2,
+    "suffix": 3,
+    "letter": "A"
+    }],
+    "solicitor": {
+        "cpf": "12345678912"
+    },
+    "info": {
+        "date": "01/01/2023"
+    }
+}
