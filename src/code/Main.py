@@ -4,6 +4,7 @@ import datetime
 import boto3
 from io import BytesIO
 import os
+import json
 
 iPath = os.environ.get('iPath')
 oPath = os.environ.get('oPath')
@@ -29,11 +30,10 @@ config = {}
 s3Client = boto3.client('s3')
 
 def handler(event, context):
-    print(type(iPath))
-    print(iPath)
-    set_arguments(event)
-    configuring(event)
-    for item in event["items"]:
+    jEvent = json.loads(event['body'])
+    set_arguments(jEvent)
+    configuring(jEvent)
+    for item in jEvent["items"]:
         list_files(iPath + '/' + make_suffix(item['suffix'], item.get('letter', None)), '{p}_{s}{l}'.format(p=item['prefix'], s=item['suffix'], l=item.get('letter','')))
 
 def configuring(cfg):

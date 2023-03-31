@@ -4,7 +4,8 @@ from aws_cdk import (
     aws_s3 as s3,
     aws_lambda as lambda_,
     aws_iam as iam,
-    aws_lambda_python_alpha as alambda_
+    aws_lambda_python_alpha as alambda_,
+    aws_apigateway as apigateway
 )
 from constructs import Construct
 
@@ -57,4 +58,15 @@ class LambdaMakePdfStack(Stack):
 #                timeout=Duration.seconds(180),
 #                environment={'iPath':'supplier/images/','oPath':'supplier/pdf/' ,'BUCKET_NAME': bucket.bucket_name}
 #                )
+        # API Gateway
+        api = apigateway.RestApi(self,
+                                 'MakePdfGateway',
+                                 rest_api_name='PDF Gateway',
+                                 description='Gateway for creating internal PDFs'
+                                 )
+
+        integration = apigateway.LambdaIntegration(lambdaFunction,
+                                                   request_templates={"application/json": '{"statusCode":"200"}'})
+        
+        api.root.add_method("POST", integration)
 
