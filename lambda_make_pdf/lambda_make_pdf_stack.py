@@ -16,8 +16,8 @@ class LambdaMakePdfStack(Stack):
         
         # Existing S3
         bucket = s3.Bucket.from_bucket_arn(self, 
-                           id = "images-8401f029-c2d6-486a-89db-1d369429f386", 
-                           bucket_arn="arn:aws:s3:::images-8401f029-c2d6-486a-89db-1d369429f386")
+                           id = "", 
+                           bucket_arn="")
         # S3 access policies
         s3ReadWrite = iam.PolicyStatement(
                 actions = ["s3:GetObject", "s3:PutObject"],
